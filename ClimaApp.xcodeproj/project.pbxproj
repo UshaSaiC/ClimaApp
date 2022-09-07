@@ -13,6 +13,8 @@
 		B251978028C7B614000C37A4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B251977E28C7B614000C37A4 /* Main.storyboard */; };
 		B251978228C7B615000C37A4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B251978128C7B615000C37A4 /* Assets.xcassets */; };
 		B251978528C7B615000C37A4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B251978328C7B615000C37A4 /* LaunchScreen.storyboard */; };
+		B251978D28C7C851000C37A4 /* dark_background.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B251978C28C7C851000C37A4 /* dark_background.pdf */; };
+		B251978F28C7C865000C37A4 /* light_background.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B251978E28C7C865000C37A4 /* light_background.pdf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		B251978128C7B615000C37A4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B251978428C7B615000C37A4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B251978628C7B615000C37A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B251978C28C7C851000C37A4 /* dark_background.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = dark_background.pdf; path = "../../Clima-iOS13/Clima/dark_background.pdf"; sourceTree = "<group>"; };
+		B251978E28C7C865000C37A4 /* light_background.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = light_background.pdf; path = "../../Clima-iOS13/Clima/light_background.pdf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		B251977728C7B614000C37A4 /* ClimaApp */ = {
 			isa = PBXGroup;
 			children = (
+				B251978E28C7C865000C37A4 /* light_background.pdf */,
+				B251978C28C7C851000C37A4 /* dark_background.pdf */,
 				B251977828C7B614000C37A4 /* AppDelegate.swift */,
 				B251977A28C7B614000C37A4 /* SceneDelegate.swift */,
 				B251977C28C7B614000C37A4 /* ViewController.swift */,
@@ -125,6 +131,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B251978F28C7C865000C37A4 /* light_background.pdf in Resources */,
+				B251978D28C7C851000C37A4 /* dark_background.pdf in Resources */,
 				B251978528C7B615000C37A4 /* LaunchScreen.storyboard in Resources */,
 				B251978228C7B615000C37A4 /* Assets.xcassets in Resources */,
 				B251978028C7B614000C37A4 /* Main.storyboard in Resources */,

@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     // based on text present in text field, it helps in deciding if we should close keypad ordo something
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        if textFieldd.text != ""{
+        if textField.text != ""{
             return true
         }else{
             textField.placeholder = "Type Something"

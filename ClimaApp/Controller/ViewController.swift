@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -22,8 +22,11 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDeleg
         weatherManager.delegate = self
         searchTextField.delegate = self
     }
+}
 
+//MARK: - UITextFieldDelegate
 
+extension ViewController: UITextFieldDelegate{
     @IBAction func seachButtonTapped(_ sender: UIButton) {
         searchTextField.endEditing(true)
         print(searchTextField.text!)
@@ -51,12 +54,13 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDeleg
             return false
         }
     }
-    
-    // didUpdateWeather is completely dependent n completion handler execution
-    // Completion handler tends to handle long running tasks like networking and these long runnning tasks are generally executed in background. In here, we are trying to update UI and networking is being done. Lets say for instance, we say wait until networking is done.. then our UI will be static in that time which is not good. So, in here if we want to wait till execution then we have to tell the same to main thread and tell after execution is done update UI
+}
+
+//MARK: - WeatherManagerDelegate
+
+extension ViewController: WeatherManagerDelegate{
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel){
         DispatchQueue.main.async {
-            // as Dispatchqueue is a closure, we have to add self label
             self.temperatureLabel.text = weather.temperatureString
             self.conditionImage.image = UIImage(systemName: weather.conditionName)
         }

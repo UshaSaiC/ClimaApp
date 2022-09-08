@@ -17,6 +17,7 @@
 		B251978F28C7C865000C37A4 /* light_background.pdf in Resources */ = {isa = PBXBuildFile; fileRef = B251978E28C7C865000C37A4 /* light_background.pdf */; };
 		B2EFAB3128C935F0009A263E /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EFAB3028C935F0009A263E /* WeatherManager.swift */; };
 		B2FFB42428CA24BA001D7EEE /* WeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFB42328CA24BA001D7EEE /* WeatherData.swift */; };
+		B2FFB42628CA2D20001D7EEE /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FFB42528CA2D20001D7EEE /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		B251978E28C7C865000C37A4 /* light_background.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; name = light_background.pdf; path = "../../Clima-iOS13/Clima/light_background.pdf"; sourceTree = "<group>"; };
 		B2EFAB3028C935F0009A263E /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		B2FFB42328CA24BA001D7EEE /* WeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherData.swift; sourceTree = "<group>"; };
+		B2FFB42528CA2D20001D7EEE /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				B2EFAB3028C935F0009A263E /* WeatherManager.swift */,
 				B2FFB42328CA24BA001D7EEE /* WeatherData.swift */,
+				B2FFB42528CA2D20001D7EEE /* WeatherModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				B2FFB42428CA24BA001D7EEE /* WeatherData.swift in Sources */,
 				B251977928C7B614000C37A4 /* AppDelegate.swift in Sources */,
 				B2EFAB3128C935F0009A263E /* WeatherManager.swift in Sources */,
+				B2FFB42628CA2D20001D7EEE /* WeatherModel.swift in Sources */,
 				B251977B28C7B614000C37A4 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

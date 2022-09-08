@@ -26,6 +26,7 @@ struct WeatherManager{
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             
+            // completion handler is { (data,...
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil{
                     delegate?.didFailWithError(error: error!)

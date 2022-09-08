@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class ViewController: UIViewController {
 
@@ -15,12 +16,34 @@ class ViewController: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     
     var weatherManager = WeatherManager()
+    
+    // CLLocationManager method is used to get location of current GPS location of phone
+    let locationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // below line displays a pop up on UI asking permission from user if they want the app to access the phones location details
+        locationManager.requestWhenInUseAuthorization()
+        
+        // Step 1
+        locationManager.delegate = self // this line must be defined before request location ese the app will crash. reason is because initially the class should be registered then only it can respond to requestLocation method
+        
+        // as we need a one time location, we use requestLocation method
+        // but lets say if its a finess app where we want our turn by turn location to be captured then we use startUpdatingLocation method as its going to constantly update the location changes
+        
+        // Step 2
+        locationManager.requestLocation()
+        
         weatherManager.delegate = self
         searchTextField.delegate = self
+    }
+    
+    
+    @IBAction func locationPressed(_ sender: UIButton) {
+        
+        // Step 4
+        locationManager.requestLocation()
     }
 }
 
@@ -63,6 +86,7 @@ extension ViewController: WeatherManagerDelegate{
         DispatchQueue.main.async {
             self.temperatureLabel.text = weather.temperatureString
             self.conditionImage.image = UIImage(systemName: weather.conditionName)
+            self.cityLabel.text = weather.cityName
         }
         
     }
@@ -72,3 +96,23 @@ extension ViewController: WeatherManagerDelegate{
     }
 }
 
+//MARK: - CLLocationManagerDelegate
+
+extension ViewController: CLLocationManagerDelegate{
+    
+    // // Step 3
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        // generally locationManager tries to get current GPS location and try to get a accurate version of location. So, by fetching the last locationwe generally get the more accurate location
+        if let location = locations.last{ // gets last element in array
+            locationManager.stopUpdatingLocation()
+            let latitude = location.coordinate.latitude
+            let longitude = location.coordinate.longitude
+            weatherManager.fetchWeather(latitude: latitude, longitude: longitude)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
+}

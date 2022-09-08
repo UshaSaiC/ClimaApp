@@ -7,7 +7,6 @@
 
 import UIKit
 
-// UITextFieldDelegate allows view controller to manage editing and validation of text in a text field object
 class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
 
     @IBOutlet weak var cityLabel: UILabel!
@@ -44,6 +43,7 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDeleg
         searchTextField.text = ""
     }
     
+    // in here, UITextField is the object that caused below delegate method
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != ""{
             return true
@@ -53,8 +53,13 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDeleg
         }
     }
     
-    func didUpdateWeather(weather: WeatherModel){
+    // in a delegate method, the first parameter should be the identity of object that caused this delegate method
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel){
         print(weather.temperatureString)
+    }
+    
+    func didFailWithError(error: Error) {
+        print(error)
     }
 }
 

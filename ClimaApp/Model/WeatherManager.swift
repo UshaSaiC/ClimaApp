@@ -7,9 +7,9 @@
 
 import Foundation
 
-// we create protocol in same file that uses protocol
 protocol WeatherManagerDelegate{
-    func didUpdateWeather(weather: WeatherModel)
+    func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel)
+    func didFailWithError(error: Error)
 }
 
 struct WeatherManager{
@@ -18,23 +18,23 @@ struct WeatherManager{
     var delegate: WeatherManagerDelegate?
     
     func fetchWeather(cityName: String){
-        let url = "\(weatherURL)&q=\(cityName)"
-        performRequest(urlString: url)
+        let urlString = "\(weatherURL)&q=\(cityName)"
+        performRequest(with: urlString)
     }
     
-    func performRequest(urlString: String){
+    func performRequest(with urlString: String){
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil{
-                    print(error!)
+                    delegate?.didFailWithError(error: error!)
                     return
                 }
                 
                 if let safeData = data{
-                    if let weather = parseJson(weatherData: safeData){
-                        delegate?.didUpdateWeather(weather: weather)
+                    if let weather = parseJson(safeData){
+                        delegate?.didUpdateWeather(self, weather: weather)
                     }
                 }
             }
@@ -43,7 +43,7 @@ struct WeatherManager{
         print(urlString)
     }
     
-    func parseJson(weatherData: Data) -> WeatherModel?{
+    func parseJson(_ weatherData: Data) -> WeatherModel?{
         let decoder = JSONDecoder()
         
         do {
@@ -55,7 +55,7 @@ struct WeatherManager{
             let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
             return weather
         } catch{
-            print(error)
+            delegate?.didFailWithError(error: error)
             return nil
         }
     }

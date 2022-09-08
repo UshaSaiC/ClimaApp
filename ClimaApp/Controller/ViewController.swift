@@ -8,7 +8,7 @@
 import UIKit
 
 // UITextFieldDelegate allows view controller to manage editing and validation of text in a text field object
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDelegate {
 
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -20,7 +20,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // below line ensures that text field reports back to view controller
+        weatherManager.delegate = self
         searchTextField.delegate = self
     }
 

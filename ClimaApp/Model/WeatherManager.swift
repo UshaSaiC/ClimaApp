@@ -7,8 +7,15 @@
 
 import Foundation
 
+// we create protocol in same file that uses protocol
+protocol WeatherManagerDelegate{
+    func didUpdateWeather(weather: WeatherModel)
+}
+
 struct WeatherManager{
     let weatherURL = "https://api.openweathermap.org/data/2.5/weather?appid=3c5773b4ba92c84d23b0e2f98b0e5418&units=metric"
+    
+    var delegate: WeatherManagerDelegate?
     
     func fetchWeather(cityName: String){
         let url = "\(weatherURL)&q=\(cityName)"
@@ -27,9 +34,7 @@ struct WeatherManager{
                 
                 if let safeData = data{
                     if let weather = parseJson(weatherData: safeData){
-                        // though below code works, its suggested not to have it as it binds the WeatherManager struct to ViewController object
-                        let weatherViewController = ViewController()
-                        weatherViewController.didUpdateWeather(weather: weather)
+                        delegate?.didUpdateWeather(weather: weather)
                     }
                 }
             }

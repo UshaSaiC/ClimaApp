@@ -7,18 +7,18 @@
 
 import Foundation
 
-// decodable means the values of its type can be decoded. For our scenarios, we need it to decode to JSON format
-struct WeatherData: Decodable{
+// Codable means a combination of decodable and encodable protocols
+struct WeatherData: Codable{
     let name: String
     let main: Main
     let weather: [Weather]
 }
 
-struct Main: Decodable{
+struct Main: Codable{
     let temp: Double
 }
 
-struct Weather: Decodable{
+struct Weather: Codable{
     let description: String
     let id: Int
 }

@@ -43,7 +43,6 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDeleg
         searchTextField.text = ""
     }
     
-    // in here, UITextField is the object that caused below delegate method
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != ""{
             return true
@@ -53,9 +52,15 @@ class ViewController: UIViewController, UITextFieldDelegate, WeatherManagerDeleg
         }
     }
     
-    // in a delegate method, the first parameter should be the identity of object that caused this delegate method
+    // didUpdateWeather is completely dependent n completion handler execution
+    // Completion handler tends to handle long running tasks like networking and these long runnning tasks are generally executed in background. In here, we are trying to update UI and networking is being done. Lets say for instance, we say wait until networking is done.. then our UI will be static in that time which is not good. So, in here if we want to wait till execution then we have to tell the same to main thread and tell after execution is done update UI
     func didUpdateWeather(_ weatherManager: WeatherManager, weather: WeatherModel){
-        print(weather.temperatureString)
+        DispatchQueue.main.async {
+            // as Dispatchqueue is a closure, we have to add self label
+            self.temperatureLabel.text = weather.temperatureString
+            self.conditionImage.image = UIImage(systemName: weather.conditionName)
+        }
+        
     }
     
     func didFailWithError(error: Error) {

@@ -7,7 +7,6 @@
 
 import Foundation
 
-// Codable means a combination of decodable and encodable protocols
 struct WeatherData: Codable{
     let name: String
     let main: Main

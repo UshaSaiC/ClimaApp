@@ -44,7 +44,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         searchTextField.text = ""
     }
     
-    // based on text present in text field, it helps in deciding if we should close keypad ordo something
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
         if textField.text != ""{
             return true

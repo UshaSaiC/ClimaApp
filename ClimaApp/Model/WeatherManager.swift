@@ -19,7 +19,6 @@ struct WeatherManager{
         if let url = URL(string: urlString){
             let session = URLSession(configuration: .default)
             
-            // creating a trailing closure
             let task = session.dataTask(with: url) { (data, response, error) in
                 if error != nil{
                     print(error!)
@@ -27,11 +26,6 @@ struct WeatherManager{
                 }
                 
                 if let safeData = data{
-                    // let dataString = String(data: safeData, encoding: .utf8)
-                    // print(dataString)
-                    
-                    // data returned by stringifying is hard to read, so we need to parse the data
-                    // sometimes calling function from closures throws error, in such cases we need to add self to call suggesting what to call the function. Below code changes to self.parseJson(weatherData: safeData)
                     parseJson(weatherData: safeData)
                 }
             }
@@ -41,19 +35,24 @@ struct WeatherManager{
     }
     
     func parseJson(weatherData: Data){
-        // JSONDecoder is used to decode JSON
         let decoder = JSONDecoder()
         
-        // decode function needs data type, so we need not create object from WeatherData... we just need to add it directly as type with .self to reference or get the type
-        // decode methods throws an exception i.e if something goes wrong it throws an error. SO we need to enclose it in try-catch block
         do {
             let decodedData = try decoder.decode(WeatherData.self, from: weatherData)
-            print(decodedData.name)
-            print(decodedData.main.temp)
-            print(decodedData.weather[0].description)
+            let id = decodedData.weather[0].id
+            let temp = decodedData.main.temp
+            let name = decodedData.name
+            
+            let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
+            
+            // calling the properties is pretty big line of code, so instead an alternative is to create computed properties
+            print(weather.getConditionName(weatherId: id))
+            print(weather.conditionName)
+            print(weather.temperatureString)
+            
         } catch{
             print(error)
         }
         
     }
-}
+    }

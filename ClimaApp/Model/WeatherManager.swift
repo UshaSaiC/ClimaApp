@@ -26,7 +26,11 @@ struct WeatherManager{
                 }
                 
                 if let safeData = data{
-                    parseJson(weatherData: safeData)
+                    if let weather = parseJson(weatherData: safeData){
+                        // though below code works, its suggested not to have it as it binds the WeatherManager struct to ViewController object
+                        let weatherViewController = ViewController()
+                        weatherViewController.didUpdateWeather(weather: weather)
+                    }
                 }
             }
             task.resume()
@@ -34,7 +38,7 @@ struct WeatherManager{
         print(urlString)
     }
     
-    func parseJson(weatherData: Data){
+    func parseJson(weatherData: Data) -> WeatherModel?{
         let decoder = JSONDecoder()
         
         do {
@@ -44,15 +48,10 @@ struct WeatherManager{
             let name = decodedData.name
             
             let weather = WeatherModel(conditionId: id, cityName: name, temperature: temp)
-            
-            // calling the properties is pretty big line of code, so instead an alternative is to create computed properties
-            print(weather.getConditionName(weatherId: id))
-            print(weather.conditionName)
-            print(weather.temperatureString)
-            
+            return weather
         } catch{
             print(error)
+            return nil
         }
-        
     }
-    }
+}

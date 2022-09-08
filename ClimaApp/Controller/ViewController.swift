@@ -52,5 +52,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
             return false
         }
     }
+    
+    func didUpdateWeather(weather: WeatherModel){
+        print(weather.temperatureString)
+    }
 }
 
